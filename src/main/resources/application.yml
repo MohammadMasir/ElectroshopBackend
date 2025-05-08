@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: electroshop-backend
+  datasource:
+    url: jdbc:postgresql://localhost:5432/electroshop
+    username: postgres
+    password: password
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    open-in-view: false
