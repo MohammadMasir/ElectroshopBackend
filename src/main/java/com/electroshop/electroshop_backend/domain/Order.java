@@ -11,8 +11,9 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 @Entity
@@ -24,24 +25,22 @@ public class Order {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@NotNull
-	@Column(name = "product_id", nullable = false)
-	private Long productId;
+	@ManyToOne
+	@JoinColumn(name = "product_id", nullable = false)
+	private Product orderProduct;
 	
-	@NotNull
-	@Column(name = "user_id", nullable = false)
-	private Long userId;
+	@ManyToOne
+	@JoinColumn(name = "user_id", nullable = false)
+	private User orderUser;
 	
-	@NotNull
-	@Column(name = "cart_id", nullable = false)
-	private Long cartId;
+	@ManyToOne
+	@JoinColumn(name = "cart_id", nullable = false)
+	private Cart cart;
 	
-	@NotNull
 	@Column(columnDefinition = "varchar(255) default 'PENDING'", nullable = false)
 	@Enumerated(EnumType.STRING)
 	private Status status;
 	
-	@NotNull
 	@Column(nullable = false)
 	private BigDecimal amount;
 	

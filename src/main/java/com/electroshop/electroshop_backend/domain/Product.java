@@ -1,6 +1,7 @@
 package com.electroshop.electroshop_backend.domain;
 
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Set;
 
 import com.electroshop.electroshop_backend.enums.StockStatus;
@@ -13,46 +14,60 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 @Entity
 @Data
-@Table(name = "product")
+@Table(name = "products")
 public class Product{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@NotNull
 	@Column(nullable = false)
 	private String name;
 	
-	@NotNull
-	@Column(nullable = false)
-	private Long categryId;
+	@ManyToOne
+	@JoinColumn(name = "category_id", nullable = false)
+	private Category category;
 	
-	@NotNull
-	@Column(nullable = false)
-	private Long brandId;
+	@ManyToOne
+	@JoinColumn(name = "user_id")
+	private User productUser;
+	
+	@ManyToOne
+	@JoinColumn(name = "brand_id")
+	private Brand brand;
 
 	private String description;
 	
 	private String color;
 	
-	@NotNull
 	@Column(nullable = false)
 	@Enumerated(EnumType.STRING)
 	private StockStatus stockStatus;
 	
-	@NotNull
 	@Column(nullable = false)
 	private BigDecimal price;
 	
 	@ManyToMany(mappedBy = "products", fetch = FetchType.LAZY)
 	private Set<Cart> carts;
+	
+	@OneToMany(mappedBy = "detailsProduct")
+	private List<ProductDetails> productDetails;
+	
+	@OneToMany(mappedBy = "orderProduct")
+	private List<Order> orders;
+	
+		
+	@OneToOne(mappedBy = "inventoryProduct")
+	private Inventory inventory;
 	
 }

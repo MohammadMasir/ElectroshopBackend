@@ -7,8 +7,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 @Entity
@@ -20,23 +21,19 @@ public class Inventory {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@NotNull
-	@Column(name = "product_id", nullable = false)
-	private Long productId;
+	@OneToOne
+	@JoinColumn(name = "product_id", nullable = false, referencedColumnName = "id")
+	private Product inventoryProduct;
 	
-	@NotNull
 	@Column(nullable = false)
 	private int quantity;
 	
-	@NotNull
 	@Column(name = "first_batch", nullable = false)
 	private LocalDateTime firstBatch;
 
-	@NotNull
 	@Column(name = "last_batch", nullable = false)
 	private LocalDateTime lastBatch;
 
-	@NotNull
 	@Column(name = "min_count",nullable = false)
 	private int minimumCount;
 	

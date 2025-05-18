@@ -12,27 +12,20 @@ import lombok.Data;
 
 @Entity
 @Data
-@Table(name = "product_details")
-public class ProductDetails {
-	
+@Table(name = "review")
+public class Review {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
 	@ManyToOne
-	@JoinColumn(name = "product_id",nullable = false)
-	private Product detailsProduct; 
+	@JoinColumn(name = "user_id", nullable = false)
+	private User reviewUser;
 	
-	@Column(name = "specification_name")
-	private String specificationName;
+	@Column(name = "rating", nullable = false)
+	private int rating;
 	
-	@Column(name = "specification_detail")
-	private String specificationDetails;
-	
-	@Column(name = "dimension_unit")
-	private double dimensionUnit;
-	
-	@Column(name = "dimension_value")
-	private double dimensionValue;
+	private String review;
 	
 }
