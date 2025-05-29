@@ -29,10 +29,4 @@ public class ProductDetails {
 	@Column(name = "specification_detail")
 	private String specificationDetails;
 	
-	@Column(name = "dimension_unit")
-	private double dimensionUnit;
-	
-	@Column(name = "dimension_value")
-	private double dimensionValue;
-	
 }

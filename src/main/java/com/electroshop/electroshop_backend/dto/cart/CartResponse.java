@@ -1,4 +1,4 @@
-package com.electroshop.electroshop_backend.dto;
+package com.electroshop.electroshop_backend.dto.cart;
 
 import java.util.Set;
 

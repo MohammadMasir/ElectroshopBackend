@@ -10,3 +10,8 @@ spring:
       ddl-auto: create
     show-sql: true
     open-in-view: false
+  security:
+    user:
+      name: user
+      password: pass
+      roles: USER
