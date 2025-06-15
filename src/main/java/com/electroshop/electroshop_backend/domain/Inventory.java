@@ -29,10 +29,10 @@ public class Inventory {
 	private int quantity;
 	
 	@Column(name = "first_batch", nullable = false)
-	private LocalDateTime firstBatch;
+	private LocalDateTime batchDate;
 
-	@Column(name = "last_batch", nullable = false)
-	private LocalDateTime lastBatch;
+	@Column(name = "seller_id", nullable = false)
+	private Seller seller;
 
 	@Column(name = "min_count",nullable = false)
 	private int minimumCount;
