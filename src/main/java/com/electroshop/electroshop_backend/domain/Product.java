@@ -66,14 +66,13 @@ public class Product{
 	@ManyToMany(mappedBy = "products", fetch = FetchType.LAZY)
 	private Set<Cart> carts;
 	
+	@ManyToMany(mappedBy = "orderProduct", fetch = FetchType.LAZY)
+	private Set<Order> orders;
+	
 	@OneToMany(mappedBy = "detailsProduct")
 	private List<ProductDetails> productDetails;
-	
-	@OneToMany(mappedBy = "orderProduct")
-	private List<Order> orders;
-	
 		
-	@OneToOne(mappedBy = "inventoryProduct")
-	private Inventory inventory;
+	@OneToMany(mappedBy = "inventoryProduct")
+	private List<Inventory> inventory;
 	
 }
