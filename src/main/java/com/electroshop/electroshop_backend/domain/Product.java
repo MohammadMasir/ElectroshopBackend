@@ -46,6 +46,10 @@ public class Product{
 	@JoinColumn(name = "brand_id")
 	private Brand brand;
 
+	@ManyToOne
+	@JoinColumn(name = "product_measurement_id")
+	private ProductMeasurement productMeasurement;
+	
 	private String description;
 	
 	private String color;
