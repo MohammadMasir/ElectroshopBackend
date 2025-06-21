@@ -1,6 +1,7 @@
 package com.electroshop.electroshop_backend.domain;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.Set;
 
 import com.electroshop.electroshop_backend.enums.MeasurementCategory;
@@ -42,6 +43,7 @@ public class ProductMeasurement {
 	@Column(nullable = false, precision = 15, scale = 6)
 	private BigDecimal value;
 	
+	@Column(name = "created_at", nullable = false)
+	private LocalDateTime createdAt;
 	
-
 }
