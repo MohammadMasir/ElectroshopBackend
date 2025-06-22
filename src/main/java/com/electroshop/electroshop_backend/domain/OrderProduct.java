@@ -5,9 +5,16 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
 @Data
-@Entity
+@Getter
+@Setter
+@NoArgsConstructor
+@RequiredArgsConstructor
 public class OrderProduct {
 
 	@Id

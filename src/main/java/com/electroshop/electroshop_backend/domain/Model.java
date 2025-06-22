@@ -9,10 +9,17 @@ import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.AssertFalse;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
 @Data
-@Entity
+@Getter
+@Setter
+@NoArgsConstructor
+@RequiredArgsConstructor
 public class Model {
 
 	@Id
