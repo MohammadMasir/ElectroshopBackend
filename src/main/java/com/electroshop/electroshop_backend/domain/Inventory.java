@@ -39,7 +39,8 @@ public class Inventory {
 	@Column(name = "first_batch", nullable = false)
 	private LocalDateTime batchDate;
 
-	@Column(name = "seller_id", nullable = false)
+	@ManyToOne
+	@JoinColumn(name = "seller_id", nullable = false)
 	private Seller seller;
 
 	@Column(name = "min_count",nullable = false)

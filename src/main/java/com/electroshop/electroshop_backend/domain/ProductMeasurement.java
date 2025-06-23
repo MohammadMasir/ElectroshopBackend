@@ -13,6 +13,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
 import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,7 +25,15 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @RequiredArgsConstructor
-@Table(name = "product_measurements")
+@Table(
+		name = "product_measurements",
+		uniqueConstraints =
+		{
+				@UniqueConstraint(columnNames = {"product_id"}),
+				@UniqueConstraint(columnNames = {"measurement_type_id"}),
+				@UniqueConstraint(columnNames = {"unit_id"})
+		}
+		)
 public class ProductMeasurement {
 	
 	@Id

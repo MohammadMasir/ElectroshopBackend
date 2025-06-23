@@ -29,7 +29,9 @@ public class Seller {
 	private String name;
 	
 	@OneToMany(mappedBy = "seller")
-	private List<Category> category;
+	private List<Category> categories;
 	
+	@OneToMany(mappedBy = "seller")
+	private List<Inventory> inventories;
 	
 }

@@ -68,11 +68,11 @@ public class Product{
 	@Column(nullable = false)
 	private BigDecimal price;
 	
-	@Column(name = "dimension_unit")
-	private String dimensionUnit;
-	
-	@Column(name = "dimension_value")
-	private double dimensionValue;
+//	@Column(name = "dimension_unit")
+//	private String dimensionUnit;
+//	
+//	@Column(name = "dimension_value")
+//	private double dimensionValue;
 	
 	@ManyToMany(mappedBy = "products", fetch = FetchType.LAZY)
 	private Set<Cart> carts;
@@ -80,8 +80,8 @@ public class Product{
 	@ManyToMany(mappedBy = "orderProduct", fetch = FetchType.LAZY)
 	private Set<Order> orders;
 	
-	@OneToMany(mappedBy = "detailsProduct")
-	private List<ProductDetails> productDetails;
+//	@OneToMany(mappedBy = "detailsProduct")
+//	private List<ProductDetails> productDetails;
 		
 	@OneToMany(mappedBy = "inventoryProduct")
 	private List<Inventory> inventory;
