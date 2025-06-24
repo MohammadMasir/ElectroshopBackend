@@ -1,6 +1,7 @@
 package com.electroshop.electroshop_backend.domain;
 
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import com.electroshop.electroshop_backend.enums.Categories;
 
@@ -34,7 +35,7 @@ public class Category {
 	private Categories name;
 	
 	@OneToMany(mappedBy = "category")
-	private List<Product> categoryProduct;
+	private Set<Product> categoryProduct = new HashSet<>();
 	
 	@ManyToOne
 	@JoinColumn(name = "seller_id")

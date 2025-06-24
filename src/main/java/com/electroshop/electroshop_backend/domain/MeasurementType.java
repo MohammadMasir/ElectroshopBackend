@@ -10,6 +10,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
 import lombok.Data;
@@ -44,7 +45,6 @@ public class MeasurementType {
 	
 	@Column(name = "created_at", nullable = false)
 	private LocalDateTime createdAt;
-	
 	
 	
 }

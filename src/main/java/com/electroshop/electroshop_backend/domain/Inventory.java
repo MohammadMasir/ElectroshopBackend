@@ -41,7 +41,7 @@ public class Inventory {
 
 	@ManyToOne
 	@JoinColumn(name = "seller_id", nullable = false)
-	private Seller seller;
+	private Seller inventorySeller;
 
 	@Column(name = "min_count",nullable = false)
 	private int minimumCount;

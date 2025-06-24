@@ -2,6 +2,7 @@ package com.electroshop.electroshop_backend.domain;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Set;
 
 import com.electroshop.electroshop_backend.enums.Status;
@@ -19,6 +20,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.Getter;
@@ -42,19 +44,16 @@ public class Order {
 	@JoinColumn(name = "user_id", nullable = false)
 	private User orderUser;
 	
-	@ManyToOne
-	@JoinColumn(name = "cart_id", nullable = false)
-	private Cart cart;
-	
-	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
-	@JoinTable(
-			name = "order_product",
-			joinColumns = 
-				@JoinColumn(name="order_id", referencedColumnName = "id"),
-			inverseJoinColumns = 
-				@JoinColumn(name = "product_id", referencedColumnName = "id" )
-			)
-	private Set<Product> orderProduct;
+//	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+//	@JoinTable(
+//			name = "order_product",
+//			joinColumns = 
+//				@JoinColumn(name="order_id", referencedColumnName = "id"),
+//			inverseJoinColumns = 
+//				@JoinColumn(name = "product_id", referencedColumnName = "id" )
+//			)
+	@OneToMany(mappedBy = "productOrder")
+	private Set<Product> orderProduct = new HashSet<>();
 	
 	@Column(columnDefinition = "varchar(255) default 'PENDING'", nullable = false)
 	@Enumerated(EnumType.STRING)

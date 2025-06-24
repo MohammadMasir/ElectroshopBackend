@@ -1,6 +1,7 @@
 package com.electroshop.electroshop_backend.domain;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -61,16 +62,10 @@ public class User {
 	@Column(name = "updated_at", nullable = false)
 	private LocalDateTime updatedAt;
 	
-	@OneToMany(mappedBy = "cartUser")
-	private List<Cart> carts;
-	
 	@OneToMany(mappedBy = "orderUser")
-	private List<Order> userOrder;
+	private List<Order> userOrder = new ArrayList<>();
 	
 	@OneToMany(mappedBy = "reviewUser")
-	private List<Review> useReview;
-	
-	@OneToMany(mappedBy = "productUser")
-	private List<Product> userProduct;
+	private List<Review> useReview = new ArrayList<>() ;
 	
 }

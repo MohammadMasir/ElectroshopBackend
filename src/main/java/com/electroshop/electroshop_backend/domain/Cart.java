@@ -1,5 +1,6 @@
 package com.electroshop.electroshop_backend.domain;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -26,7 +27,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @RequiredArgsConstructor
-@Table(name = "cart")
+@Table(name = "carts")
 public class Cart{
 
 	@Id
@@ -37,17 +38,15 @@ public class Cart{
 	@JoinColumn(name = "user_id" ,nullable = false)
 	private User cartUser;
 	
-	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
-	@JoinTable(
-			name = "cart_product",
-			joinColumns = 
-				@JoinColumn(name="cart_id", referencedColumnName = "id"),
-			inverseJoinColumns = 
-				@JoinColumn(name = "product_id", referencedColumnName = "id" )
-			)
-	private Set<Product> products;
-	
-	@OneToMany(mappedBy = "cart")
-	private List<Order> orders;
+//	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+//	@JoinTable(
+//			name = "cart_product",
+//			joinColumns = 
+//				@JoinColumn(name="cart_id", referencedColumnName = "id"),
+//			inverseJoinColumns = 
+//				@JoinColumn(name = "product_id", referencedColumnName = "id" )
+//			)
+	@OneToMany(mappedBy = "products")
+	private Set<Product> products = new HashSet<>();
 	
 }
