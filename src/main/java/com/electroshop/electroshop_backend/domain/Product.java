@@ -47,7 +47,7 @@ public class Product{
 	
 	@ManyToOne
 	@JoinColumn(name = "seller_id")
-	private User productSeller;
+	private Seller productSeller;
 	
 	@ManyToOne
 	@JoinColumn(name = "brand_id")
@@ -72,23 +72,14 @@ public class Product{
 	@Column(nullable = false)
 	private BigDecimal price;
 	
-//	@Column(name = "dimension_unit")
-//	private String dimensionUnit;
-//	
-//	@Column(name = "dimension_value")
-//	private double dimensionValue;
+	@OneToMany(mappedBy = "products")
+	private Set<CartProduct> cartProducts = new HashSet<>();
 	
-//	@ManyToMany(mappedBy = "products", fetch = FetchType.LAZY)
-//	private Set<Cart> carts; #
+	@OneToMany(mappedBy = "products")
+	private Set<OrderProduct> orders = new HashSet<>();
 	
-	@OneToMany(mappedBy = "carts")
-	private Set<Cart> carts = new HashSet<>();
-	
-	@OneToMany(mappedBy = "orders")
-	private Set<Order> orders = new HashSet<>();
-	
-//	@OneToMany(mappedBy = "detailsProduct")
-//	private List<ProductDetails> productDetails;
+	@OneToMany(mappedBy = "detailsProduct")
+	private List<ProductDetails> productDetails = new ArrayList<>();
 		
 	@OneToMany(mappedBy = "inventoryProduct")
 	private List<Inventory> inventory = new ArrayList<>();

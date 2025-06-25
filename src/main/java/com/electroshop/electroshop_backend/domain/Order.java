@@ -44,16 +44,8 @@ public class Order {
 	@JoinColumn(name = "user_id", nullable = false)
 	private User orderUser;
 	
-//	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
-//	@JoinTable(
-//			name = "order_product",
-//			joinColumns = 
-//				@JoinColumn(name="order_id", referencedColumnName = "id"),
-//			inverseJoinColumns = 
-//				@JoinColumn(name = "product_id", referencedColumnName = "id" )
-//			)
-	@OneToMany(mappedBy = "productOrder")
-	private Set<Product> orderProduct = new HashSet<>();
+	@OneToMany(mappedBy = "orders")
+	private Set<OrderProduct> orderProduct = new HashSet<>();
 	
 	@Column(columnDefinition = "varchar(255) default 'PENDING'", nullable = false)
 	@Enumerated(EnumType.STRING)

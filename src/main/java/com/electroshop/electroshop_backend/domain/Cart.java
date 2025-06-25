@@ -38,15 +38,7 @@ public class Cart{
 	@JoinColumn(name = "user_id" ,nullable = false)
 	private User cartUser;
 	
-//	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
-//	@JoinTable(
-//			name = "cart_product",
-//			joinColumns = 
-//				@JoinColumn(name="cart_id", referencedColumnName = "id"),
-//			inverseJoinColumns = 
-//				@JoinColumn(name = "product_id", referencedColumnName = "id" )
-//			)
-	@OneToMany(mappedBy = "products")
-	private Set<Product> products = new HashSet<>();
+	@OneToMany(mappedBy = "carts")
+	private Set<CartProduct> cartProducts = new HashSet<>();
 	
 }

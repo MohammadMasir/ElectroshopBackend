@@ -7,6 +7,8 @@ import com.electroshop.electroshop_backend.enums.MeasurementCategory;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -26,9 +28,9 @@ import lombok.Setter;
 @Table(
 		name = "unit",
 		uniqueConstraints = {
-				@UniqueConstraint(columnNames = {"id", "category"}),
-				@UniqueConstraint(columnNames = {"name", "category"}),
-				@UniqueConstraint(columnNames = {"symbol","category"})
+				@UniqueConstraint(name = "uk_unit_category", columnNames = {"id", "measurement_category"}),
+				@UniqueConstraint(name = "uk_unit_name_category", columnNames = {"name", "measurement_category"}),
+				@UniqueConstraint(name = "uk_unit_symbol_category", columnNames = {"symbol","measurement_category"})
 			}
 		)
 public class Unit {
@@ -43,8 +45,9 @@ public class Unit {
 	@Column(nullable = false)
 	private String symbol;
 	
-	@Column(nullable = false)
-	private MeasurementCategory category;
+	@Column(name = "measurement_category", nullable = false)
+	@Enumerated(EnumType.STRING)
+	private MeasurementCategory measurementCategory;
 	
 	@Column(name = "conversion_factor", precision = 20, scale = 10, nullable = false)
 	private BigDecimal conversionFactor;

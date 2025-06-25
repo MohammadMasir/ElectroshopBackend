@@ -2,15 +2,23 @@ package com.electroshop.electroshop_backend.domain;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Set;
+
+import org.hibernate.annotations.Comment;
 
 import com.electroshop.electroshop_backend.enums.MeasurementCategory;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinColumns;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
@@ -40,21 +48,25 @@ public class ProductMeasurement {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(name = "product_id", nullable = false)
-	@OneToMany(mappedBy = "productMeasurement")
-	private Set<Product> products;
+	@ManyToOne
+	@JoinColumns({
+		@JoinColumn(name = "measurement_type_id", referencedColumnName = "id", insertable = false, updatable = false),
+		@JoinColumn(name = "measurement_category", referencedColumnName = "measurement_category", insertable = false, updatable = false),
+				}
+			)
+	private MeasurementType measurementType;
 	
-	@Column(name = "measurment_type_id", nullable = false)
-	@OneToMany(mappedBy = "measurmentType")
-	private Set<MeasurementType> measurementTypes;
+	@ManyToOne
+	@JoinColumns({
+		@JoinColumn(name = "unit_id", referencedColumnName = "id", insertable = false, updatable = false),
+		@JoinColumn(name = "measurement_category", referencedColumnName = "measurement_category", insertable = false, updatable = false)
+				}
+			)
+	private Unit unit;
 	
-	@Column(name = "measurement_category_id", nullable = false)
-	@OneToMany(mappedBy = "measurementCategory")
-	private Set<MeasurementCategory> measurementCategories;
-
-	@Column(name = "unit_id", nullable = false)
-	@OneToMany(mappedBy = "unit")
-	private Set<Unit> units;
+	@ManyToOne
+	@JoinColumn(name = "product_id")
+	private Product product;
 	
 	@Column(nullable = false, precision = 15, scale = 6)
 	private BigDecimal value;
