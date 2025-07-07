@@ -51,7 +51,7 @@ public class User implements UserDetails {
 	private String email;
 	
 	@Column(name = "phone_no", nullable = false, length = 10)
-	private String phoneNo;
+	private String phoneNumber;
 	
 	@Column(name = "country_code", nullable = false)
 	private String countryCode;
@@ -87,14 +87,12 @@ public class User implements UserDetails {
 
 	@Override
 	public String getPassword() {
-		
 		return password;
 	}
 
 	@Override
 	public String getUsername() {
-		
-		return firstName + lastName;
+		return phoneNumber;
 	}
 	
 }
