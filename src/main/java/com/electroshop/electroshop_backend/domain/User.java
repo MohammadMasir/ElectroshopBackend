@@ -47,7 +47,7 @@ public class User implements UserDetails {
 	@Column(name = "last_name")
 	private String lastName;
 	
-	@Column(name = "email", nullable = false)
+	@Column(name = "email")
 	private String email;
 	
 	@Column(name = "phone_no", nullable = false, length = 10)
@@ -62,7 +62,7 @@ public class User implements UserDetails {
 	@Column(nullable = false)
 	private String password;
 	
-	@Column(nullable = false)
+	@Column()
 	private String address;
 	
 	@CreationTimestamp
