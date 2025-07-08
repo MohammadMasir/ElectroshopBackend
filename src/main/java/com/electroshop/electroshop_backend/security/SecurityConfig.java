@@ -32,36 +32,37 @@ public class SecurityConfig {
 		return http.csrf(csrf -> csrf.disable())
 					.authorizeHttpRequests(authorize -> 
 						authorize
-							.requestMatchers("/signup").permitAll()
+//							.requestMatchers("/").permitAll()
+//							.requestMatchers("/signup").permitAll()
 							.requestMatchers("/login").permitAll()
-							.requestMatchers("/home").permitAll()
+//							.requestMatchers("/home").permitAll()
 							.anyRequest().authenticated())
 					.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
 					.build();
 	}
 	
 
-	@Bean
-	UserDetailsService userDetailsService() {
-		return new CustomUserDetailsService();
-	}
+//	@Bean
+//	UserDetailsService userDetailsService() {
+//		return new CustomUserDetailsService();
+//	}
 	
 	@Bean
 	PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
 	
-	@Bean
-	AuthenticationManager authenticationManager(AuthenticationConfiguration authConfig) throws Exception {
-		return authConfig.getAuthenticationManager();
-	}
+//	@Bean
+//	AuthenticationManager authenticationManager(AuthenticationConfiguration authConfig) throws Exception {
+//		return authConfig.getAuthenticationManager();
+//	}
 	
 	@Bean
-	AuthenticationProvider authenticationProvider(UserDetailsService userDetailsService, PasswordEncoder passwordEncoder) {
+	AuthenticationManager authenticationManager(UserDetailsService userDetailsService, PasswordEncoder passwordEncoder) {
 		DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
 		daoAuthenticationProvider.setUserDetailsService(userDetailsService);
 		daoAuthenticationProvider.setPasswordEncoder(passwordEncoder);
-		return daoAuthenticationProvider;
+		return new ProviderManager(daoAuthenticationProvider);
 	}
 	
 }
