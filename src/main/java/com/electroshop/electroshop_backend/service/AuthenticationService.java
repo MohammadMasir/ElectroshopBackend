@@ -1,14 +1,15 @@
 package com.electroshop.electroshop_backend.service;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.electroshop.electroshop_backend.domain.User;
+import com.electroshop.electroshop_backend.dto.user.NewUser;
 import com.electroshop.electroshop_backend.dto.user.UserQuery;
+import com.electroshop.electroshop_backend.mapper.UserMapper;
 import com.electroshop.electroshop_backend.repository.UserRepository;
 import com.electroshop.electroshop_backend.security.JwtUtil;
 
@@ -19,12 +20,25 @@ public class AuthenticationService {
 	private final JwtUtil jwtUtil;
 	private final AuthenticationManager authenticationManager;
 	private final PasswordEncoder passwordEncoder;
+	private final UserMapper userMapper;
 	
-	public AuthenticationService(UserRepository userRepository, JwtUtil jwtUtil, AuthenticationManager authenticationManager, PasswordEncoder passwordEncoder) {
+	public AuthenticationService(
+			UserRepository userRepository, 
+			JwtUtil jwtUtil, 
+			AuthenticationManager authenticationManager, 
+			PasswordEncoder passwordEncoder,
+			UserMapper userMapper
+			) {
 		this.userRepository = userRepository;
 		this.jwtUtil = jwtUtil;
 		this.authenticationManager = authenticationManager;
 		this.passwordEncoder = passwordEncoder;
+		this.userMapper = userMapper;
+	}
+
+	public User signup(NewUser newUserDto) {
+		User newUser = userMapper.toUser(newUserDto, passwordEncoder);
+		return userRepository.save(newUser);
 	}
 	
 	public String login(UserQuery user) {
@@ -42,9 +56,6 @@ public class AuthenticationService {
 		}
 	}
 	
-	public Boolean signup() {
-		return true;
-	}
 	
 }
 

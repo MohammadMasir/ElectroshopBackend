@@ -41,29 +41,24 @@ public class User implements UserDetails {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(name = "first_name")
-	private String firstName;
-	
-	@Column(name = "last_name")
-	private String lastName;
-	
-	@Column(name = "email")
-	private String email;
-	
 	@Column(name = "phone_no", nullable = false, length = 10)
 	private String phoneNumber;
 	
 	@Column(name = "country_code", nullable = false)
 	private String countryCode;
 	
-	@Enumerated(EnumType.STRING)
-	private Role role;
-	
 	@Column(nullable = false)
 	private String password;
+
+	@Enumerated(EnumType.STRING)
+	@Column(nullable = false)
+	private Role role;
 	
-	@Column()
-	private String address;
+	@Column(name = "first_name", nullable = false)
+	private String firstName;
+	
+	@Column(name = "last_name", nullable = false)
+	private String lastName;
 	
 	@CreationTimestamp
 	@Column(name = "created_at", nullable = false, updatable = false)
@@ -72,6 +67,12 @@ public class User implements UserDetails {
 	@UpdateTimestamp
 	@Column(name = "updated_at", nullable = false)
 	private LocalDateTime updatedAt;
+	
+	@Column(name = "email", nullable = true)
+	private String email;
+	
+	@Column(nullable = true)
+	private String address;
 	
 	@OneToMany(mappedBy = "orderUser")
 	private List<Order> userOrder = new ArrayList<>();

@@ -31,7 +31,7 @@ public class SecurityConfig {
 					.authorizeHttpRequests(authorize -> 
 						authorize
 //							.requestMatchers("/").permitAll()
-//							.requestMatchers("/signup").permitAll()
+							.requestMatchers("electroshop/signup").permitAll()
 							.requestMatchers("/login").permitAll()
 //							.requestMatchers("/home").permitAll()
 							.anyRequest().authenticated())
