@@ -4,10 +4,10 @@ spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/electroshop
     username: postgres
-    password: password
+    password: postgres
   jpa:
     hibernate:
-      ddl-auto: none
+      ddl-auto: create-drop
     show-sql: true
     open-in-view: false
   security:
