@@ -51,8 +51,8 @@ public class User implements UserDetails {
 	private String password;
 
 	@Enumerated(EnumType.STRING)
-	@Column(nullable = false)
-	private Role role;
+	@Column(nullable = false, columnDefinition = "VARCHAR(20) default 'USER'")
+	private Role role = Role.USER;
 	
 	@Column(name = "first_name", nullable = false)
 	private String firstName;

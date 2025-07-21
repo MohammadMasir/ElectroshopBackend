@@ -17,7 +17,7 @@ import com.electroshop.electroshop_backend.security.JwtUtil;
 public class AuthenticationService {
 
 	private final UserRepository userRepository;
-	private final JwtUtil jwtUtil;
+//	private final JwtUtil jwtUtil;
 	private final AuthenticationManager authenticationManager;
 	private final PasswordEncoder passwordEncoder;
 	private final UserMapper userMapper;
@@ -30,7 +30,7 @@ public class AuthenticationService {
 			UserMapper userMapper
 			) {
 		this.userRepository = userRepository;
-		this.jwtUtil = jwtUtil;
+//		this.jwtUtil = jwtUtil;
 		this.authenticationManager = authenticationManager;
 		this.passwordEncoder = passwordEncoder;
 		this.userMapper = userMapper;
@@ -41,20 +41,20 @@ public class AuthenticationService {
 		return userRepository.save(newUser);
 	}
 	
-	public String login(UserQuery user) {
-		try {
-			authenticationManager.authenticate(
-				new UsernamePasswordAuthenticationToken(user.phoneNumber(), user.password())
-				);
-		
-		return jwtUtil.generateToken();
-		
-	} catch (AuthenticationException e) {
-		// TODO Auto-generated catch block
-//		e.printStackTrace();
-		return "";
-		}
-	}
+//	public String login(UserQuery user) {
+//		try {
+//			authenticationManager.authenticate(
+//				new UsernamePasswordAuthenticationToken(user.phoneNumber(), user.password())
+//				);
+//
+//		return jwtUtil.generateToken();
+//
+//	} catch (AuthenticationException e) {
+//		// TODO Auto-generated catch block
+////		e.printStackTrace();
+//		return "";
+//		}
+//	}
 	
 	
 }

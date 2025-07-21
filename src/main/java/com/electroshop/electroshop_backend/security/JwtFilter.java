@@ -17,8 +17,22 @@ public class JwtFilter extends OncePerRequestFilter {
 
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
-			throws ServletException, IOException {		
-		
+			throws ServletException, IOException {
+
+//		String path = request.getRequestURI();
+//		System.out.println(path.contains("/signup"));
+		if (isAllowed(request)){
+			filterChain.doFilter(request,response);
+			System.out.println(isAllowed(request));
+			return;
+		}
+
+		filterChain.doFilter(request, response);
+	}
+
+	private boolean isAllowed(HttpServletRequest request){
+		String path = request.getRequestURI();
+		return path.endsWith("/signup") || path.endsWith("/login") || path.endsWith("/");
 	}
 
 }
