@@ -1,5 +1,8 @@
 package com.electroshop.electroshop_backend.controller;
 
+import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,11 +27,12 @@ public class AuthenticationController {
 	}
 
 	@PostMapping("/signup")
-	@ResponseBody
-	public User signup(@RequestBody NewUser newUser) {
-		System.out.println("INSIDE THE SIGNUP endpoint....");
-		return authService.signup(newUser);
-	}
+	public ResponseEntity<?> signup(@Valid @RequestBody NewUser newUser) {
+			if (authService.signup(newUser)){
+				return new ResponseEntity<>(HttpStatus.CREATED);
+			}
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
 	
 	
 }

@@ -21,12 +21,12 @@ public class JwtFilter extends OncePerRequestFilter {
 
 //		String path = request.getRequestURI();
 //		System.out.println(path.contains("/signup"));
-		if (isAllowed(request)){
-			filterChain.doFilter(request,response);
-			System.out.println(isAllowed(request));
-			return;
-		}
-
+//		if (isAllowed(request)){
+//			filterChain.doFilter(request,response);
+//			System.out.println(isAllowed(request));
+//			return;
+//		}
+//
 		filterChain.doFilter(request, response);
 	}
 

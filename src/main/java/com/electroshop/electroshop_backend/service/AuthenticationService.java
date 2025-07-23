@@ -36,9 +36,17 @@ public class AuthenticationService {
 		this.userMapper = userMapper;
 	}
 
-	public User signup(NewUser newUserDto) {
-		User newUser = userMapper.toUser(newUserDto, passwordEncoder);
-		return userRepository.save(newUser);
+	public boolean signup(NewUser newUserDto) {
+        try {
+            if (newUserDto != null){
+                User newUser = userMapper.toUser(newUserDto, passwordEncoder);
+                userRepository.save(newUser);
+                return true;
+            }
+			return false;
+        } catch (Exception e) {
+            return false;
+        }
 	}
 	
 //	public String login(UserQuery user) {
