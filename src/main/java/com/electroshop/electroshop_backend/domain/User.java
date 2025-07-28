@@ -71,7 +71,7 @@ public class User implements UserDetails {
 	private LocalDateTime updatedAt;
 
 	@Email(message = "Invalid email.")
-	@Column(name = "email", nullable = true)
+	@Column(name = "email")
 	private String email;
 
 	@Column(nullable = true)

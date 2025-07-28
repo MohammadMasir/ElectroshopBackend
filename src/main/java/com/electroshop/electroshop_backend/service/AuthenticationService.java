@@ -1,5 +1,6 @@
 package com.electroshop.electroshop_backend.service;
 
+import com.electroshop.electroshop_backend.dto.user.UserLogin;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.AuthenticationException;
@@ -8,29 +9,28 @@ import org.springframework.stereotype.Service;
 
 import com.electroshop.electroshop_backend.domain.User;
 import com.electroshop.electroshop_backend.dto.user.NewUser;
-import com.electroshop.electroshop_backend.dto.user.UserQuery;
 import com.electroshop.electroshop_backend.mapper.UserMapper;
 import com.electroshop.electroshop_backend.repository.UserRepository;
-import com.electroshop.electroshop_backend.security.JwtUtil;
+import com.electroshop.electroshop_backend.security.JwtService;
 
 @Service
 public class AuthenticationService {
 
 	private final UserRepository userRepository;
-//	private final JwtUtil jwtUtil;
+	private final JwtService jwtService;
 	private final AuthenticationManager authenticationManager;
 	private final PasswordEncoder passwordEncoder;
 	private final UserMapper userMapper;
 	
 	public AuthenticationService(
 			UserRepository userRepository, 
-			JwtUtil jwtUtil, 
+			JwtService jwtService,
 			AuthenticationManager authenticationManager, 
 			PasswordEncoder passwordEncoder,
 			UserMapper userMapper
 			) {
 		this.userRepository = userRepository;
-//		this.jwtUtil = jwtUtil;
+		this.jwtService = jwtService;
 		this.authenticationManager = authenticationManager;
 		this.passwordEncoder = passwordEncoder;
 		this.userMapper = userMapper;
@@ -49,20 +49,18 @@ public class AuthenticationService {
         }
 	}
 	
-//	public String login(UserQuery user) {
-//		try {
-//			authenticationManager.authenticate(
-//				new UsernamePasswordAuthenticationToken(user.phoneNumber(), user.password())
-//				);
-//
-//		return jwtUtil.generateToken();
-//
-//	} catch (AuthenticationException e) {
-//		// TODO Auto-generated catch block
-////		e.printStackTrace();
-//		return "";
-//		}
-//	}
+	public String login(UserLogin user) {
+		try {
+			authenticationManager.authenticate(
+				new UsernamePasswordAuthenticationToken(user.phoneNumber(), user.password())
+				);
+		return jwtService.generateToken(userRepository.findByPhoneNumber(user.phoneNumber()));
+
+	} catch (AuthenticationException e) {
+
+		return "";
+		}
+	}
 	
 	
 }

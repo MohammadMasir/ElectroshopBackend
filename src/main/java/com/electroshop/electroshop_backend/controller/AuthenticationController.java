@@ -1,14 +1,12 @@
 package com.electroshop.electroshop_backend.controller;
 
+import com.electroshop.electroshop_backend.dto.user.UserLogin;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.electroshop.electroshop_backend.domain.User;
 import com.electroshop.electroshop_backend.dto.user.NewUser;
-import com.electroshop.electroshop_backend.dto.user.UserQuery;
 import com.electroshop.electroshop_backend.service.AuthenticationService;
 
 @RestController
@@ -22,8 +20,13 @@ public class AuthenticationController {
 	}
 	
 	@PostMapping("/login")
-	public ResponseEntity<?> login(@RequestBody UserQuery user) {
-		return ResponseEntity.ok("df");
+	public ResponseEntity<?> login(@RequestBody UserLogin user) {
+		try{
+			String token = authService.login(user);
+			return new ResponseEntity<>(token,HttpStatus.OK);
+		} catch (RuntimeException e) {
+			throw new RuntimeException(e);
+		}
 	}
 
 	@PostMapping("/signup")
