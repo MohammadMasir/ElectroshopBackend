@@ -11,17 +11,14 @@ import com.electroshop.electroshop_backend.repository.UserRepository;
 public class CustomUserDetailsService implements UserDetailsService {
 
 	private UserRepository userRepository;
-	
-	public CustomUserDetailsService() {}
-	
+
 	public CustomUserDetailsService(UserRepository userRepository) {
 		this.userRepository = userRepository;
 	}
 	
 	@Override
 	public UserDetails loadUserByUsername(String phoneNumber) throws UsernameNotFoundException {
-		
-		return userRepository.findByPhoneNumber(phoneNumber);
+		return userRepository.findByPhoneNumber(phoneNumber).orElseThrow();
 	}
 
 	

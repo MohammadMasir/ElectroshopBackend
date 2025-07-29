@@ -22,8 +22,7 @@ import com.electroshop.electroshop_backend.service.CustomUserDetailsService;
 public class SecurityConfig {
 	
 	private final JwtFilter jwtFilter;
-//	private final 
-	
+
 	public SecurityConfig(JwtFilter jwtFilter) {
 		this.jwtFilter = jwtFilter;
 	}
@@ -37,30 +36,17 @@ public class SecurityConfig {
 				)
 					.authorizeHttpRequests(authorize -> 
 						authorize
-							.requestMatchers("/").permitAll()
 							.requestMatchers("/electroshop/signup").permitAll()
 							.requestMatchers("/electroshop/login").permitAll()
-//							.requestMatchers("/home").permitAll()
 							.anyRequest().authenticated())
 					.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
 					.build();
 	}
 	
-
-//	@Bean
-//	UserDetailsService userDetailsService() {
-//		return new CustomUserDetailsService();
-//	}
-	
 	@Bean
 	PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
-	
-//	@Bean
-//	AuthenticationManager authenticationManager(AuthenticationConfiguration authConfig) throws Exception {
-//		return authConfig.getAuthenticationManager();
-//	}
 	
 	@Bean
 	AuthenticationManager authenticationManager(CustomUserDetailsService userDetailsService, PasswordEncoder passwordEncoder) {

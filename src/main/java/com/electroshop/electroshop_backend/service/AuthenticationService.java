@@ -4,6 +4,7 @@ import com.electroshop.electroshop_backend.dto.user.UserLogin;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -54,11 +55,9 @@ public class AuthenticationService {
 			authenticationManager.authenticate(
 				new UsernamePasswordAuthenticationToken(user.phoneNumber(), user.password())
 				);
-		return jwtService.generateToken(userRepository.findByPhoneNumber(user.phoneNumber()));
-
+		return jwtService.generateToken(userRepository.findByPhoneNumber(user.phoneNumber()).orElseThrow());
 	} catch (AuthenticationException e) {
-
-		return "";
+		throw new RuntimeException(e);
 		}
 	}
 	
