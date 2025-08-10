@@ -15,7 +15,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import com.electroshop.electroshop_backend.service.CustomUserDetailsService;
+import com.electroshop.electroshop_backend.user.service.CustomUserDetailsService;
 
 @Configuration
 @EnableWebSecurity
