@@ -1,5 +1,6 @@
 package com.electroshop.electroshop_backend.product.domain;
 
+import com.electroshop.electroshop_backend.product.enums.Ratings;
 import com.electroshop.electroshop_backend.user.domain.User;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -21,9 +22,14 @@ public class Review {
 	@ManyToOne
 	@JoinColumn(name = "user_id", nullable = false)
 	private User reviewUser;
+
+	@ManyToOne
+	@JoinColumn(name = "prod_id", nullable = false)
+	private Product reviewProduct;
 	
 	@Column(name = "rating", nullable = false)
-	private int rating;
+	@Enumerated(EnumType.STRING)
+	private Ratings rating;
 	
 	private String review;
 	

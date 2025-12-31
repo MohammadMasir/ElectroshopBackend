@@ -37,6 +37,7 @@ public class AuthenticationService {
 	public boolean signup(NewUser newUserDto) {
         try {
             if (newUserDto != null){
+
                 User newUser = userMapper.toUser(newUserDto, passwordEncoder);
                 userRepository.save(newUser);
                 return true;

@@ -17,7 +17,6 @@ import java.util.Set;
 @Getter
 @Setter
 @NoArgsConstructor
-//@RequiredArgsConstructor
 @Table(name = "seller")
 public class Seller {
 
@@ -28,17 +27,16 @@ public class Seller {
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "user_id", referencedColumnName = "id")
 	private User user;
-	
-	@Column(nullable = false)
-	private String name;
-	
-	@OneToMany(mappedBy = "seller")
-	private Set<Category> categories = new HashSet<>();
+
+	//@OneToMany(mappedBy = "seller") // TBR
+	//private Set<Category> categories = new HashSet<>();
 	
 	@OneToMany(mappedBy = "inventorySeller")
 	private List<Inventory> inventories = new ArrayList<>();
 	
 	@OneToMany(mappedBy = "productSeller")
 	private List<Product> products = new ArrayList<>();
-	
+
+	@OneToMany(mappedBy = "categorySeller")
+	private Set<SellerCategory> sellerCategories = new HashSet<>();
 }

@@ -10,7 +10,6 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-//@RequiredArgsConstructor
 @Table(name = "order_product")
 public class OrderProduct {
 
@@ -19,8 +18,8 @@ public class OrderProduct {
 	private Long id;
 	
 	@ManyToOne
-	@JoinColumn(name = "products")
-	private Product products;
+	@JoinColumn(name = "product_id")
+	private Product orderProduct;
 	
 	@ManyToOne
 	@JoinColumn(name = "orders")

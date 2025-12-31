@@ -61,14 +61,25 @@ public class User implements UserDetails {
 	@Column(name = "email")
 	private String email;
 
-	@Column(nullable = true)
+	@Column
 	private String address;
+	@Column
+	private String pincode;
+	@Column
+	private String district;
+	@Column
+	private String city;
+	@Column
+	private String state;
 
 	@OneToMany(mappedBy = "orderUser")
 	private List<Order> userOrder = new ArrayList<>();
 
 	@OneToMany(mappedBy = "reviewUser")
-	private List<Review> useReview = new ArrayList<>() ;
+	private List<Review> useReview = new ArrayList<>();
+
+	@OneToMany(mappedBy = "daUser")
+	private List<DeliveryAddress> deliveryAddresses = new ArrayList<>();
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {

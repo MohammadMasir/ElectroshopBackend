@@ -25,7 +25,7 @@ public class Inventory {
 	private Product inventoryProduct;
 	
 	@Column(nullable = false)
-	private int quantity;
+	private Integer quantity;
 	
 	@Column(name = "first_batch", nullable = false)
 	private LocalDateTime batchDate;

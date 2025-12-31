@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -28,6 +29,6 @@ public class Model {
 	private Brand brandModel;
 	
 	@OneToMany(mappedBy = "model")
-	private List<Product> products;
+	private List<Product> products = new ArrayList<>();
 	
 }

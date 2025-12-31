@@ -14,14 +14,11 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @NoArgsConstructor
-//@RequiredArgsConstructor
 @Table(
 		name = "product_measurements",
 		uniqueConstraints =
 		{
-				@UniqueConstraint(columnNames = {"product_id"}),
-				@UniqueConstraint(columnNames = {"measurement_type_id"}),
-				@UniqueConstraint(columnNames = {"unit_id"})
+				@UniqueConstraint(columnNames = {"product_id", "measurement_type_id", "unit_id"}),
 		}
 		)
 public class ProductMeasurement {
@@ -48,7 +45,7 @@ public class ProductMeasurement {
 	
 	@ManyToOne
 	@JoinColumn(name = "product_id")
-	private Product product;
+	private Product measurementProduct;
 	
 	@Column(nullable = false, precision = 15, scale = 6)
 	private BigDecimal value;

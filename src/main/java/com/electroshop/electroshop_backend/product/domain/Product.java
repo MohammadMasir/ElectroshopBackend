@@ -20,58 +20,62 @@ import java.util.Set;
 @Getter
 @Setter
 @NoArgsConstructor
-//@RequiredArgsConstructor
 @Table(name = "products")
 public class Product{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
+	private String description;
+
+	private String color;
+
 	@Column(nullable = false)
 	private String name;
-	
-	@ManyToOne
-	@JoinColumn(name = "category_id", nullable = false)
-	private Category category;
-	
-	@ManyToOne
-	@JoinColumn(name = "seller_id")
-	private Seller productSeller;
-	
-	@ManyToOne
-	@JoinColumn(name = "brand_id")
-	private Brand brand;
-	
-	@ManyToOne
-	@JoinColumn(name = "model_id")
-	private Model model;
 
-	@ManyToOne
-	@JoinColumn(name = "product_measurement_id")
-	private ProductMeasurement productMeasurement;
-	
-	private String description;
-	
-	private String color;
-	
 	@Column(nullable = false)
 	@Enumerated(EnumType.STRING)
 	private StockStatus stockStatus;
 	
 	@Column(nullable = false)
 	private BigDecimal price;
-	
-	@OneToMany(mappedBy = "products")
+
+	@Column(name = "product_measurement_id")
+	@OneToMany(mappedBy = "measurementProduct")
+	private List<ProductMeasurement> productMeasurement = new ArrayList<>();
+
+	@OneToMany(mappedBy = "prodFeature")
+	private Set<ProductFeature> productKeyFeatures = new HashSet<>();
+
+	@OneToMany(mappedBy = "cartProduct")
 	private Set<CartProduct> cartProducts = new HashSet<>();
-	
-	@OneToMany(mappedBy = "products")
+
+	@OneToMany(mappedBy = "orderProduct")
 	private Set<OrderProduct> orders = new HashSet<>();
-	
+
+	@OneToMany(mappedBy = "reviewProduct")
+	private List<Review> prodReview = new ArrayList<>() ;
+
 	@OneToMany(mappedBy = "detailsProduct")
 	private List<ProductDetails> productDetails = new ArrayList<>();
 		
 	@OneToMany(mappedBy = "inventoryProduct")
 	private List<Inventory> inventory = new ArrayList<>();
-	
+
+	@ManyToOne
+	@JoinColumn(name = "category_id", nullable = false)
+	private Category category;
+
+	@ManyToOne
+	@JoinColumn(name = "seller_id")
+	private Seller productSeller;
+
+	@ManyToOne
+	@JoinColumn(name = "brand_id")
+	private Brand brand;
+
+	@ManyToOne
+	@JoinColumn(name = "model_id")
+	private Model model;
 }

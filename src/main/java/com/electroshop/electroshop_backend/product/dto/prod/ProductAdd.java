@@ -1,4 +1,4 @@
-package com.electroshop.electroshop_backend.product.dto;
+package com.electroshop.electroshop_backend.product.dto.prod;
 
 import java.math.BigDecimal;
 import java.util.HashMap;
@@ -10,8 +10,9 @@ public record ProductAdd(
         BigDecimal price, // Product
         String stockStatus, // Product
         HashMap<String, Double> dimensions, // Product
-        String brand, // Brand
-        String category, //	 Category
+        String brandName, // Brand
+        String categoryName, //	 Category
+        String modelName, // Model
         HashMap<String, String> specification, // ProductDetails
-        String review // Review
+        Integer quantity // Inventory
 ) {}
