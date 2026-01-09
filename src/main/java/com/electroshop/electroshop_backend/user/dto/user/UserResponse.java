@@ -1,4 +1,4 @@
-package com.electroshop.electroshop_backend.user.dto;
+package com.electroshop.electroshop_backend.user.dto.user;
 
 public record UserResponse(
 		String firstName,

@@ -1,7 +1,7 @@
 package com.electroshop.electroshop_backend.user.mapper;
 
 import com.electroshop.electroshop_backend.user.domain.User;
-import com.electroshop.electroshop_backend.user.dto.NewUser;
+import com.electroshop.electroshop_backend.user.dto.user.NewUser;
 import org.mapstruct.Context;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
