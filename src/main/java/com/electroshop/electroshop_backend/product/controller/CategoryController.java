@@ -1,25 +1,27 @@
 package com.electroshop.electroshop_backend.product.controller;
 
-import com.electroshop.electroshop_backend.product.domain.Category;
 import com.electroshop.electroshop_backend.product.dto.category.NewCategory;
 import com.electroshop.electroshop_backend.product.service.CategoryService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/electroshop/category")
+@RequestMapping("/electroshop/admin/category")
 public class CategoryController {
 
     private final CategoryService categoryService;
 
     public CategoryController(CategoryService categoryService){this.categoryService = categoryService;}
 
-    @PostMapping
+    @PreAuthorize("hasAuthority('SUPER_ADMIN')")
+    @PostMapping("/new")
     public ResponseEntity<?> createCategory(@Valid @RequestBody NewCategory newCategory){
         try {
             categoryService.create(newCategory);
+
             return new ResponseEntity<>(HttpStatus.CREATED);
         }
         catch (RuntimeException e){
@@ -45,6 +47,7 @@ public class CategoryController {
         }
     }
 
+    @PreAuthorize("hasAuthority('SUPER_ADMIN')")
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteCategoryById(@PathVariable Long id){
         try {
@@ -54,5 +57,4 @@ public class CategoryController {
             throw new RuntimeException(e);
         }
     }
-
 }

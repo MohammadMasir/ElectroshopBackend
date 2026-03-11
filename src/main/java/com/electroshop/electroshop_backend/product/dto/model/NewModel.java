@@ -1,4 +1,6 @@
 package com.electroshop.electroshop_backend.product.dto.model;
 
-public record NewModel() {
+public record NewModel(
+        String name
+) {
 }

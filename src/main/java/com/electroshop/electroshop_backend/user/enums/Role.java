@@ -1,7 +1,8 @@
 package com.electroshop.electroshop_backend.user.enums;
 
 public enum Role {
-	ADMIN, // TBR
+	SUPER_ADMIN,
+	SYSTEM_ADMIN, // TBR
 	USER,
 	CUSTOMER,
 	SELLER

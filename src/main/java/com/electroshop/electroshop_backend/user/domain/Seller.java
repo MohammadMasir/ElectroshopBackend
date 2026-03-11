@@ -28,8 +28,8 @@ public class Seller {
 	@JoinColumn(name = "user_id", referencedColumnName = "id")
 	private User user;
 
-	//@OneToMany(mappedBy = "seller") // TBR
-	//private Set<Category> categories = new HashSet<>();
+	@OneToMany(mappedBy = "pickupAddressSeller")
+	private List<PickupAddress> pickupAddresses = new ArrayList<>();
 	
 	@OneToMany(mappedBy = "inventorySeller")
 	private List<Inventory> inventories = new ArrayList<>();
@@ -37,6 +37,6 @@ public class Seller {
 	@OneToMany(mappedBy = "productSeller")
 	private List<Product> products = new ArrayList<>();
 
-	@OneToMany(mappedBy = "categorySeller")
+	@OneToMany(mappedBy = "categorySeller") // M-M
 	private Set<SellerCategory> sellerCategories = new HashSet<>();
 }

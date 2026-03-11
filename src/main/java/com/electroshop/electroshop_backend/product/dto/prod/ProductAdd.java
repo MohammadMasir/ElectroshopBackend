@@ -10,9 +10,9 @@ public record ProductAdd(
         BigDecimal price, // Product
         String stockStatus, // Product
         HashMap<String, Double> dimensions, // Product
-        String brandName, // Brand
-        String categoryName, //	 Category
-        String modelName, // Model
+        String brandId, // Brand
+        String categoryId, //	 Category
+        String modelId, // Model
         HashMap<String, String> specification, // ProductDetails
         Integer quantity // Inventory
 ) {}

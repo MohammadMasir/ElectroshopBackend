@@ -5,7 +5,9 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +15,6 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-//@RequiredArgsConstructor
 @Table(name = "brands")
 public class Brand{
 
@@ -23,6 +24,10 @@ public class Brand{
 	
 	@Column(name = "brand_name", nullable = false)
 	private String brandName;
+
+	@CreationTimestamp
+	@Column(name = "created_at", nullable = false, updatable = false)
+	private LocalDateTime createdAt;
 	
 	@OneToMany(mappedBy = "brand")
 	private List<Product> brandProduct = new ArrayList<>();

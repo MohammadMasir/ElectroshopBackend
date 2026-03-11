@@ -2,15 +2,13 @@ package com.electroshop.electroshop_backend.user.domain;
 
 import jakarta.persistence.*;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Getter
 @Setter
-@NoArgsConstructor
-@Table(name = "delivery_address")
-public class DeliveryAddress {
+@Table(name = "pickup_address")
+public class PickupAddress {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,7 +25,6 @@ public class DeliveryAddress {
     private String state;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User daUser;
-
+    @JoinColumn(name = "seller_id")
+    private Seller pickupAddressSeller;
 }

@@ -10,7 +10,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-@Table(name = "SellerCategory")
+@Table(name = "seller_category")
 public class SellerCategory {
 
     @Id

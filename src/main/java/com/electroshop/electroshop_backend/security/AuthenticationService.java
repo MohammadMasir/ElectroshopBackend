@@ -96,6 +96,10 @@ public class AuthenticationService {
 			return false;
 		} */
 	}
+
+	public boolean employeeSuperAdmin(Long employeeId){
+		return employeeRepository.isSuperAdmin(employeeId);
+	}
 	
 }
 

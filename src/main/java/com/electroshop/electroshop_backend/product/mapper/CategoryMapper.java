@@ -15,12 +15,7 @@ public interface CategoryMapper {
     @Mapping(target = "createdAt", ignore = true)
     Category toCategory(NewCategory newCategory);
 
-//    @Mapping(target = "id", ignore = true)
-//    @Mapping(target = "createdAt", ignore = true)
     List<CategoryResponse> toListOfCategoryResponse(List<Category> category);
 
-//    @Mapping(target = "id", ignore = true)
-//    @Mapping(target = "createdAt", ignore = true)
     CategoryResponse toCategoryResponse(Category category);
-
 }

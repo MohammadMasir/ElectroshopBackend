@@ -5,7 +5,9 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +15,6 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-//@RequiredArgsConstructor
 @Table(name = "model")
 public class Model {
 
@@ -23,6 +24,10 @@ public class Model {
 	
 	@NotNull
 	private String name;
+
+	@CreationTimestamp
+	@Column(name = "created_at", nullable = false)
+	private LocalDateTime createdAt;
 	
 	@ManyToOne
 	@JoinColumn(name = "brand_id", nullable = false)

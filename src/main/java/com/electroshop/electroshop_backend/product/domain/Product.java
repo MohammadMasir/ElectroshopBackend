@@ -3,14 +3,18 @@ package com.electroshop.electroshop_backend.product.domain;
 import com.electroshop.electroshop_backend.cart.domain.CartProduct;
 import com.electroshop.electroshop_backend.measurement.domain.ProductMeasurement;
 import com.electroshop.electroshop_backend.order.domain.OrderProduct;
+import com.electroshop.electroshop_backend.product.enums.ApprovalStatus;
 import com.electroshop.electroshop_backend.product.enums.StockStatus;
 import com.electroshop.electroshop_backend.user.domain.Seller;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -40,6 +44,18 @@ public class Product{
 	
 	@Column(nullable = false)
 	private BigDecimal price;
+
+	@Enumerated(EnumType.STRING)
+	@Column(name = "approval_status", nullable = false, columnDefinition = "VARCHAR(20) default 'PENDING'")
+	private ApprovalStatus approvalStatus = ApprovalStatus.PENDING;
+
+	@CreationTimestamp
+	@Column(name = "created_at", nullable = false, updatable = false)
+	private LocalDateTime createdAt;
+
+	@UpdateTimestamp
+	@Column(name = "updated_at", nullable = false)
+	private LocalDateTime updatedAt;
 
 	@Column(name = "product_measurement_id")
 	@OneToMany(mappedBy = "measurementProduct")

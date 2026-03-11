@@ -1,7 +1,9 @@
 package com.electroshop.electroshop_backend.security;
 
+import com.electroshop.electroshop_backend.user.dto.admin.AdminLogin;
 import com.electroshop.electroshop_backend.user.dto.user.NewUser;
 import com.electroshop.electroshop_backend.user.dto.user.UserLogin;
+import com.electroshop.electroshop_backend.user.enums.Role;
 import com.electroshop.electroshop_backend.user.service.AdminService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -16,7 +18,11 @@ public class AuthenticationController {
 	private final AuthenticationService authService;
 	private final AdminService adminService;
 	
-	public AuthenticationController(AuthenticationService authService, AdminService adminService) {
+	public AuthenticationController(
+			AuthenticationService authService,
+			AdminService adminService
+	)
+	{
 		this.authService = authService;
 		this.adminService = adminService;
 	}
@@ -39,11 +45,25 @@ public class AuthenticationController {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
-	@Transactional
-	@PutMapping("/admin/register")
-	public ResponseEntity<String> adminRegister(@Valid @RequestParam Long employeeId) {
+	@PostMapping("/emp-admin-login")
+	public ResponseEntity<String> adminLogin(@Valid @RequestBody AdminLogin adminLogin) {
+        try {
+            	String token = authService.login(adminLogin);
+                return new ResponseEntity<>(token, HttpStatus.CREATED);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+	@PostMapping("/emp-admin-register")
+	public ResponseEntity<?> adminRegister(@Valid @RequestParam Long employeeId) {
 			if (authService.employeeExist(employeeId)){
-				return new ResponseEntity<>(adminService.makeEmployeeAdmin(employeeId),HttpStatus.OK);
+				if (authService.employeeSuperAdmin(employeeId)){
+					adminService.createAdmin(employeeId, Role.SUPER_ADMIN);
+				} else {
+					adminService.createAdmin(employeeId, Role.SYSTEM_ADMIN);
+				}
+				return new ResponseEntity<>(HttpStatus.OK);
 			}
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
@@ -56,15 +76,6 @@ public class AuthenticationController {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }*/
 
-	/*
-	@PostMapping("/admin/login")
-	public ResponseEntity<?> adminLogin(@Valid @RequestBody AdminLogin adminLogin) {
-			if (authService.login(newUser)){
-				return new ResponseEntity<>(HttpStatus.CREATED);
-			}
-			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-
-    }*/
 
 	/*
 	@PostMapping("/seller/register")
