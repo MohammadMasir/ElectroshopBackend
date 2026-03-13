@@ -20,8 +20,7 @@ public class BrandService {
     }
 
     public void create(NewBrand newBrand){
-        Brand brand = brandMapper.toBrand(newBrand);
-        brandRepository.save(brand);
+        brandRepository.save(brandMapper.toBrand(newBrand));
     }
 
     public void update(Brand brand){

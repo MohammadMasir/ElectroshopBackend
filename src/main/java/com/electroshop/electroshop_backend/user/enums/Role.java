@@ -5,5 +5,4 @@ public enum Role {
 	SYSTEM_ADMIN, // TBR
 	USER,
 	CUSTOMER,
-	SELLER
 }

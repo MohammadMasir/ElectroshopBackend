@@ -5,7 +5,6 @@ import com.electroshop.electroshop_backend.measurement.domain.ProductMeasurement
 import com.electroshop.electroshop_backend.order.domain.OrderProduct;
 import com.electroshop.electroshop_backend.product.enums.ApprovalStatus;
 import com.electroshop.electroshop_backend.product.enums.StockStatus;
-import com.electroshop.electroshop_backend.user.domain.Seller;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -83,9 +82,9 @@ public class Product{
 	@JoinColumn(name = "category_id", nullable = false)
 	private Category category;
 
-	@ManyToOne
-	@JoinColumn(name = "seller_id")
-	private Seller productSeller;
+//	@ManyToOne
+//	@JoinColumn(name = "seller_id")
+//	private Seller productSeller;
 
 	@ManyToOne
 	@JoinColumn(name = "brand_id")

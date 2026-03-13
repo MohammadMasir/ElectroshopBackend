@@ -1,6 +1,5 @@
 package com.electroshop.electroshop_backend.product.controller;
 
-import com.electroshop.electroshop_backend.product.domain.Product;
 import com.electroshop.electroshop_backend.product.dto.prod.ProductAdd;
 import com.electroshop.electroshop_backend.product.service.ProductService;
 import jakarta.validation.Valid;
@@ -29,7 +28,7 @@ public class ProductController {
     }
 
     @PostMapping
-    @PreAuthorize("hasRole('Seller')")
+    @PreAuthorize("hasRole('SuperAdmin')")
     public ResponseEntity<?> createProduct(@Valid @RequestBody ProductAdd newProduct){
         try {
             productService.createProd(newProduct);

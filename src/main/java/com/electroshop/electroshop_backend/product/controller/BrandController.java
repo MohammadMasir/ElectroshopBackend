@@ -31,7 +31,7 @@ public class BrandController {
     }
 
     @GetMapping
-    public ResponseEntity<?> getCategories(){
+    public ResponseEntity<?> getBrandDetails(){
         try {
             return new ResponseEntity<>(brandService.get(),HttpStatus.OK);
         } catch (RuntimeException e){

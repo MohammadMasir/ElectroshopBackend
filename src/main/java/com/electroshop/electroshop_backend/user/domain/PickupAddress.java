@@ -1,5 +1,6 @@
 package com.electroshop.electroshop_backend.user.domain;
 
+import com.electroshop.electroshop_backend.product.domain.Warehouse;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -25,6 +26,6 @@ public class PickupAddress {
     private String state;
 
     @ManyToOne
-    @JoinColumn(name = "seller_id")
-    private Seller pickupAddressSeller;
+    @JoinColumn(name = "warehouse_id")
+    private Warehouse warehousePickupAddress;
 }

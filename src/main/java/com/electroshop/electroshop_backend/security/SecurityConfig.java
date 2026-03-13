@@ -55,7 +55,7 @@ public class SecurityConfig {
                                 .requestMatchers("/electroshop/emp-admin-login").permitAll()
                                 .requestMatchers("/electroshop/admin/set-password").permitAll()
                                 .requestMatchers("/electroshop/admin/**").hasAnyAuthority("SUPER_ADMIN","SYSTEM_ADMIN")
-                                .requestMatchers("/electroshop/seller/**").hasRole("SELLER")
+//                                .requestMatchers("/electroshop/seller/**").hasRole("SELLER")
                                 .anyRequest().authenticated())
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();

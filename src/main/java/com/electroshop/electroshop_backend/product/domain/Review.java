@@ -11,7 +11,6 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-//@RequiredArgsConstructor
 @Table(name = "review")
 public class Review {
 

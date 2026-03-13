@@ -1,10 +1,9 @@
 package com.electroshop.electroshop_backend.product.repository;
 
-import com.electroshop.electroshop_backend.product.domain.Inventory;
+import com.electroshop.electroshop_backend.product.domain.Warehouse;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface InventoryRepository extends JpaRepository<Inventory, Long> {
-
+public interface WarehouseRepository extends JpaRepository<Warehouse, Long> {
 }
