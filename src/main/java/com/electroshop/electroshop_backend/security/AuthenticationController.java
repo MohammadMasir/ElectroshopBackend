@@ -57,16 +57,23 @@ public class AuthenticationController {
 
 	@PostMapping("/emp-admin-register")
 	public ResponseEntity<?> adminRegister(@Valid @RequestParam Long employeeId) {
-			if (authService.employeeExist(employeeId)){
-				if (authService.employeeSuperAdmin(employeeId)){
+		try {
+			String role = authService.employeeExist(employeeId);
+				if (role.equals("SUPER_ADMIN")) {
 					adminService.createAdmin(employeeId, Role.SUPER_ADMIN);
-				} else {
-					adminService.createAdmin(employeeId, Role.SYSTEM_ADMIN);
 				}
-				return new ResponseEntity<>(HttpStatus.OK);
-			}
-			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-    }
+				else if (role.equals("SYSTEM_ADMIN")) {
+					adminService.createAdmin(employeeId, Role.SYSTEM_ADMIN);
+					}
+				else {
+					adminService.createAdmin(employeeId, Role.INVENTORY_ADMIN);
+				}
+					return new ResponseEntity<>(HttpStatus.OK);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+}
 	/*
 	@PostMapping("/admin/register")
 	public ResponseEntity<?> adminSetPassword(@Valid @RequestBody SetAdminPassword password) {
@@ -86,6 +93,3 @@ public class AuthenticationController {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 */
-	
-	
-}

@@ -5,7 +5,9 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +20,11 @@ public class Vendor {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long vendorId;
+    private Long id;
+
+    @CreationTimestamp
+    @Column(name = "created_at", nullable = false, updatable = false)
+    private LocalDateTime createdAt;
 
     @Column(name = "vendor_name")
     private String vendorName;

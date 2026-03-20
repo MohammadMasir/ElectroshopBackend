@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -27,30 +28,31 @@ public class ProductMeasurement {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@CreationTimestamp
+	@Column(name = "created_at", nullable = false)
+	private LocalDateTime createdAt;
+
 	@ManyToOne
-	@JoinColumns({
-		@JoinColumn(name = "measurement_type_id", referencedColumnName = "id", insertable = false, updatable = false),
-		@JoinColumn(name = "measurement_category", referencedColumnName = "measurement_category", insertable = false, updatable = false),
-				}
-			)
+//	@JoinColumns({
+	@JoinColumn(name = "measurement_type_id", referencedColumnName = "id", updatable = false)
+//		@JoinColumn(name = "measurement_category", referencedColumnName = "measurement_category", insertable = false, updatable = false),
+//				}
+//			)
 	private MeasurementType measurementType;
-	
+
 	@ManyToOne
-	@JoinColumns({
-		@JoinColumn(name = "unit_id", referencedColumnName = "id", insertable = false, updatable = false),
-		@JoinColumn(name = "measurement_category", referencedColumnName = "measurement_category", insertable = false, updatable = false)
-				}
-			)
+//	@JoinColumns({
+	@JoinColumn(name = "unit_id", referencedColumnName = "id", updatable = false)
+//		@JoinColumn(name = "measurement_category", referencedColumnName = "measurement_category", insertable = false, updatable = false)
+//				}
+//			)
 	private Unit unit;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "product_id")
 	private Product measurementProduct;
-	
+
 	@Column(nullable = false, precision = 15, scale = 6)
 	private BigDecimal value;
-	
-	@Column(name = "created_at", nullable = false)
-	private LocalDateTime createdAt;
-	
+
 }

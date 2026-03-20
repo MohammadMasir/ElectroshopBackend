@@ -15,30 +15,30 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 //@RequiredArgsConstructor
 @Table(
-		name = "measurement_types",
-		uniqueConstraints = {
-				@UniqueConstraint(name = "uk_measurement_type_category", columnNames = {"id", "measurement_category"}),
-				@UniqueConstraint(name = "uk_measurement_name_category", columnNames = {"name", "measurement_category"}) // This defines the composite unique constraint on both the columns simultaneously.
-		}
+		name = "measurement_types"
+//		uniqueConstraints = {
+//				@UniqueConstraint(name = "uk_measurement_type_category", columnNames = {"id", "measurement_category"}),
+//				@UniqueConstraint(name = "uk_measurement_name_category", columnNames = {"name", "measurement_category"}) // This defines the composite unique constraint on both the columns simultaneously.
+//		}
 		)
 public class MeasurementType {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
-	@Column(nullable = false)
+
+	@CreationTimestamp
+	@Column(name = "created_at",updatable = false, nullable = false)
+	private LocalDateTime createdAt;
+
+	@Column(nullable = false, unique = true)
 	private String name;
-	
+
 	@Column(name = "measurement_category", nullable = false)
 	@Enumerated(EnumType.STRING)
 	private MeasurementCategory measurementCategory;
-	
+
 	@Column(nullable = false)
 	private String description;
-	
-	@CreationTimestamp
-	@Column(name = "created_at", nullable = false)
-	private LocalDateTime createdAt;
-	
+
 }

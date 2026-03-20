@@ -1,6 +1,6 @@
 package com.electroshop.electroshop_backend.product.controller;
 
-import com.electroshop.electroshop_backend.product.dto.prod.ProductAdd;
+import com.electroshop.electroshop_backend.product.dto.prod.ProductDto;
 import com.electroshop.electroshop_backend.product.service.ProductService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -28,8 +28,8 @@ public class ProductController {
     }
 
     @PostMapping
-    @PreAuthorize("hasRole('SuperAdmin')")
-    public ResponseEntity<?> createProduct(@Valid @RequestBody ProductAdd newProduct){
+    @PreAuthorize("hasAuthority('SUPER_ADMIN')")
+    public ResponseEntity<?> createProduct(@Valid @RequestBody ProductDto newProduct){
         try {
             productService.createProd(newProduct);
             return new ResponseEntity<>(HttpStatus.CREATED);

@@ -18,7 +18,7 @@ public class ModelController {
         this.modelService = modelService;
     }
 
-    @PreAuthorize("hasRole('SUPER_ADMIN')")
+    @PreAuthorize("hasAuthority('SUPER_ADMIN')")
     @PostMapping("/new")
     public ResponseEntity<?> createModel(@Valid @RequestBody NewModel newModel){
         try {
@@ -48,7 +48,7 @@ public class ModelController {
         }
     }
 
-    @PreAuthorize("hasRole('SUPER_ADMIN')")
+    @PreAuthorize("hasAuthority('SUPER_ADMIN')")
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteModelById(@PathVariable Long id){
         try {

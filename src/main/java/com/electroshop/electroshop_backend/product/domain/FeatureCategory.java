@@ -17,7 +17,7 @@ public class FeatureCategory {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "feature_id")
+    @JoinColumn(name = "feature_id", unique = true)
     private KeyFeatures keyFeatures;
 
     @ManyToOne

@@ -8,6 +8,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping("/electroshop/admin/inventory")
 public class InventoryController {
 
     private final InventoryService inventoryService;
@@ -16,8 +17,8 @@ public class InventoryController {
         this.inventoryService = inventoryService;
     }
 
-    @PreAuthorize("hasRole('SUPER_ADMIN','SYSTEM_ADMIN')")
-    @PostMapping
+    @PreAuthorize("hasAnyAuthority('SUPER_ADMIN','INVENTORY_ADMIN')")
+    @PostMapping("/new")
     public ResponseEntity<?> newInventory(NewInventory newInventory){
         try {
             inventoryService.createInventory(newInventory);
@@ -46,7 +47,7 @@ public class InventoryController {
     }
 
 
-    @PreAuthorize("hasRole('SUPER_ADMIN','SYSTEM_ADMIN')")
+    @PreAuthorize("hasAnyAuthority('SUPER_ADMIN','INVENTORY_ADMIN')")
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteInventoryById(@PathVariable Long id){
         try {
@@ -56,5 +57,4 @@ public class InventoryController {
             throw new RuntimeException(e);
         }
     }
-
 }

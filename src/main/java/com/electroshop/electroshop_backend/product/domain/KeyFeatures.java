@@ -22,5 +22,5 @@ public class KeyFeatures {
     private String featureName;
 
     @OneToMany(mappedBy = "keyFeatures")
-    private Set<ProductFeature> products;
+    private Set<ProductKeyFeature> products;
 }

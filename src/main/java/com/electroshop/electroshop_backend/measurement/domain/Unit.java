@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -27,25 +28,27 @@ public class Unit {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
+	@CreationTimestamp
+	@Column(name = "created_at", nullable = false, updatable = false)
+	private LocalDateTime createdAt;
+
 	@Column(nullable = false)
 	private String name;
-	
+
 	@Column(nullable = false)
 	private String symbol;
-	
+
 	@Column(name = "measurement_category", nullable = false)
 	@Enumerated(EnumType.STRING)
 	private MeasurementCategory measurementCategory;
-	
+
 	@Column(name = "conversion_factor", precision = 20, scale = 10, nullable = false)
 	private BigDecimal conversionFactor;
-	
+
 	@Column(name = "is_base_unit", nullable = false)
 	private Boolean isBaseUnit;
-	
-	@Column(name = "created_at", nullable = false)
-	private LocalDateTime createdAt;
+
 
 
 }

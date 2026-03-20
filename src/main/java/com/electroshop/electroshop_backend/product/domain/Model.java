@@ -26,7 +26,7 @@ public class Model {
 	private String name;
 
 	@CreationTimestamp
-	@Column(name = "created_at", nullable = false)
+	@Column(name = "created_at",updatable = false, nullable = false)
 	private LocalDateTime createdAt;
 	
 	@ManyToOne

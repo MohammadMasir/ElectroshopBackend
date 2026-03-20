@@ -1,24 +1,23 @@
 package com.electroshop.electroshop_backend.product.mapper;
 
 import com.electroshop.electroshop_backend.product.domain.Product;
-import com.electroshop.electroshop_backend.product.dto.prod.ProductAdd;
-import com.electroshop.electroshop_backend.product.dto.prod.ProductResponse;
+import com.electroshop.electroshop_backend.product.dto.prod.ProductDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import org.mapstruct.Mappings;
 
 import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface ProductMapper {
 
-	List<ProductResponse> toDtoAll(List<Product> product);
+	@Mapping(target = "id", ignore = true)
+	@Mapping(target = "createdAt", ignore = true)
+	@Mapping(target = "updatedAt", ignore = true)
+	@Mapping(target = "stockStatus", ignore = true)
+	Product toProduct(ProductDto newProduct);
 
-	ProductResponse toDto(Product product);
+	List<ProductDto> toListOfProductResponse(List<Product> product);
 
-//	@Mappings({
-//			@Mapping(target = "", source = "")
-//	})
-	Product toEntity(ProductAdd newProduct);
-	
+	ProductDto toProductResponse(Product product);
+
 }

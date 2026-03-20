@@ -8,6 +8,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping("/electroshop/admin/warehouse")
 public class WarehouseController {
 
     private final WarehouseService warehouseService;
@@ -16,8 +17,8 @@ public class WarehouseController {
         this.warehouseService = warehouseService;
     }
 
-    @PreAuthorize("hasRole('SUPER_ADMIN','SYSTEM_ADMIN')")
-    @PostMapping
+    @PreAuthorize("hasAuthority('SUPER_ADMIN')")
+    @PostMapping("/new")
     public ResponseEntity<?> newWarehouse(NewWarehouse newWarehouse){
         try {
             warehouseService.createWarehouse(newWarehouse);
@@ -27,7 +28,7 @@ public class WarehouseController {
         }
     }
 
-    @PreAuthorize("hasRole('SUPER_ADMIN','SYSTEM_ADMIN')")
+    @PreAuthorize("hasAnyAuthority('SUPER_ADMIN','SYSTEM_ADMIN')")
     @GetMapping
     public ResponseEntity<?> getWarehouseDetail(){
         try {
@@ -37,7 +38,7 @@ public class WarehouseController {
         }
     }
 
-    @PreAuthorize("hasRole('SUPER_ADMIN','SYSTEM_ADMIN')")
+    @PreAuthorize("hasAnyAuthority('SUPER_ADMIN','SYSTEM_ADMIN')")
     @GetMapping("/{id}")
     public ResponseEntity<?> getWarehouseById(@PathVariable Long id){
         try {
@@ -47,7 +48,7 @@ public class WarehouseController {
         }
     }
 
-    @PreAuthorize("hasRole('SUPER_ADMIN','SYSTEM_ADMIN')")
+    @PreAuthorize("hasAuthority('SUPER_ADMIN')")
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteWarehouseById(@PathVariable Long id){
         try {

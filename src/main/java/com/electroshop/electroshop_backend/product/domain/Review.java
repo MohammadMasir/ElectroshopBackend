@@ -6,6 +6,9 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
+
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -18,6 +21,8 @@ public class Review {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	private String review;
+
 	@ManyToOne
 	@JoinColumn(name = "user_id", nullable = false)
 	private User reviewUser;
@@ -25,11 +30,13 @@ public class Review {
 	@ManyToOne
 	@JoinColumn(name = "prod_id", nullable = false)
 	private Product reviewProduct;
-	
+
 	@Column(name = "rating", nullable = false)
 	@Enumerated(EnumType.STRING)
 	private Ratings rating;
-	
-	private String review;
-	
+
+	@CreationTimestamp
+	@Column(name = "created_at",updatable = false, nullable = false)
+	private LocalDateTime createdAt;
+
 }

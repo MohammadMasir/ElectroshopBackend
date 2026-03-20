@@ -13,7 +13,6 @@ import java.util.Set;
 @Getter
 @Setter
 @NoArgsConstructor
-//@RequiredArgsConstructor
 @Table(name = "carts")
 public class Cart{
 

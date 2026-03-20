@@ -86,9 +86,8 @@ public class AuthenticationService {
 		}
 	}
 
-	public boolean employeeExist(Long employeeId){
-		Optional<Employee> employee = employeeRepository.findById(employeeId);
-        return employee.isPresent();
+	public String employeeExist(Long employeeId){
+        return employeeRepository.ifEmployeeExistsGetRole(employeeId);
 		// Below is another way to do the same check whether the employee is Present :
 		/* 		if (employee.isPresent()){
 			return true;
@@ -96,10 +95,5 @@ public class AuthenticationService {
 			return false;
 		} */
 	}
-
-	public boolean employeeSuperAdmin(Long employeeId){
-		return employeeRepository.isSuperAdmin(employeeId);
-	}
-	
 }
 

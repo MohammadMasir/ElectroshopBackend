@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class ModelService {
+public class    ModelService {
     private final ModelRepository modelRepository;
     private final ModelMapper modelMapper;
 
@@ -22,8 +22,7 @@ public class ModelService {
     }
 
     public void create(NewModel newModel){
-        Model model = modelMapper.toModel(newModel);
-        modelRepository.save(model);
+        modelRepository.save(modelMapper.toModel(newModel));
     }
 
     public void update(Model model){

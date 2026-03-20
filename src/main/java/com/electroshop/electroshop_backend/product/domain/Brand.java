@@ -23,7 +23,7 @@ public class Brand{
 	private Long id;
 	
 	@Column(name = "brand_name", nullable = false)
-	private String brandName;
+	private String name;
 
 	@CreationTimestamp
 	@Column(name = "created_at", nullable = false, updatable = false)

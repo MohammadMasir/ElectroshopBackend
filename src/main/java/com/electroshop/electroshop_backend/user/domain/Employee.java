@@ -1,8 +1,7 @@
 package com.electroshop.electroshop_backend.user.domain;
 
-import com.electroshop.electroshop_backend.user.enums.SAStatus;
+import com.electroshop.electroshop_backend.user.enums.EmployeeRole;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -23,7 +22,7 @@ public class Employee {
     private String email;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "super_admin", nullable = false)
-    private SAStatus superAdmin = SAStatus.NO;
+    @Column(name = "role", nullable = false)
+    private EmployeeRole role = EmployeeRole.SYSTEM_ADMIN;
 
 }

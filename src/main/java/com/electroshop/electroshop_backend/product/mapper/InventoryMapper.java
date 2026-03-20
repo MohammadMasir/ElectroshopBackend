@@ -11,7 +11,8 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface InventoryMapper {
     @Mapping(target = "id", ignore = true)
-    @Mapping(target = "createdAt", ignore = true)
+    @Mapping(target = "firstBatch", ignore = true)
+    @Mapping(target = "latestBatch", ignore = true)
     Inventory toInventory(NewInventory newInventory);
 
     List<InventoryResponse> toListOfInventoryResponse(List<Inventory> inventory);

@@ -30,23 +30,19 @@ public class Product{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	private String description;
-
-	private String color;
-
 	@Column(nullable = false)
 	private String name;
 
-	@Column(nullable = false)
-	@Enumerated(EnumType.STRING)
-	private StockStatus stockStatus;
-	
+	private String color;
+
+	private String description;
+
 	@Column(nullable = false)
 	private BigDecimal price;
 
-	@Enumerated(EnumType.STRING)
-	@Column(name = "approval_status", nullable = false, columnDefinition = "VARCHAR(20) default 'PENDING'")
-	private ApprovalStatus approvalStatus = ApprovalStatus.PENDING;
+//	@Enumerated(EnumType.STRING) // This will be implemented once we shift to Multi-Vendor model.
+//	@Column(name = "approval_status", nullable = false, columnDefinition = "VARCHAR(20) default 'PENDING'")
+//	private ApprovalStatus approvalStatus = ApprovalStatus.PENDING;
 
 	@CreationTimestamp
 	@Column(name = "created_at", nullable = false, updatable = false)
@@ -56,12 +52,11 @@ public class Product{
 	@Column(name = "updated_at", nullable = false)
 	private LocalDateTime updatedAt;
 
-	@Column(name = "product_measurement_id")
 	@OneToMany(mappedBy = "measurementProduct")
 	private List<ProductMeasurement> productMeasurement = new ArrayList<>();
 
 	@OneToMany(mappedBy = "prodFeature")
-	private Set<ProductFeature> productKeyFeatures = new HashSet<>();
+	private Set<ProductKeyFeature> productKeyFeatures = new HashSet<>();
 
 	@OneToMany(mappedBy = "cartProduct")
 	private Set<CartProduct> cartProducts = new HashSet<>();
@@ -87,10 +82,10 @@ public class Product{
 //	private Seller productSeller;
 
 	@ManyToOne
-	@JoinColumn(name = "brand_id")
+	@JoinColumn(name = "brand_id", nullable = false)
 	private Brand brand;
 
 	@ManyToOne
-	@JoinColumn(name = "model_id")
+	@JoinColumn(name = "model_id",nullable = false)
 	private Model model;
 }

@@ -18,7 +18,7 @@ public class BrandController {
         this.brandService = brandService;
     }
 
-    @PreAuthorize("hasRole('SUPER_ADMIN')")
+    @PreAuthorize("hasAuthority('SUPER_ADMIN')")
     @PostMapping("/new")
     public ResponseEntity<?> createBrand(@Valid @RequestBody NewBrand newBrand){
         try {
@@ -48,7 +48,7 @@ public class BrandController {
         }
     }
 
-    @PreAuthorize("hasRole('SUPER_ADMIN')")
+    @PreAuthorize("hasAuthority('SUPER_ADMIN')")
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteBrandById(@PathVariable Long id){
         try {

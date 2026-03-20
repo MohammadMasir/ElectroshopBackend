@@ -10,11 +10,14 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @Table(name = "ProductFeature")
-public class ProductFeature {
+public class ProductKeyFeature { // M-M
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(nullable = false)
+    private String value;
 
     @ManyToOne
     @JoinColumn(name = "product_id")

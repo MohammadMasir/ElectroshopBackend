@@ -1,7 +1,6 @@
 package com.electroshop.electroshop_backend.product.service;
 
-import com.electroshop.electroshop_backend.product.dto.prod.ProductAdd;
-import com.electroshop.electroshop_backend.product.dto.prod.ProductResponse;
+import com.electroshop.electroshop_backend.product.dto.prod.ProductDto;
 import com.electroshop.electroshop_backend.product.mapper.ProductMapper;
 import com.electroshop.electroshop_backend.product.repository.ProductRepository;
 import org.springframework.stereotype.Service;
@@ -19,17 +18,17 @@ public class ProductService {
         this.productMapper = productMapper;
     }
 
-    public List<ProductResponse> getProducts(){
+    public List<ProductDto> getProducts(){
         try{
-            return productMapper.toDtoAll(productRepository.findAll());
+            return productMapper.toListOfProductResponse(productRepository.findAll());
         } catch (RuntimeException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public void createProd(ProductAdd newProduct){
+    public void createProd(ProductDto newProduct){
         try {
-            productRepository.save(productMapper.toEntity(newProduct));
+            productRepository.save(productMapper.toProduct(newProduct));
         } catch (RuntimeException e) {
             throw new RuntimeException(e);
         }
