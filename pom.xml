@@ -8,10 +8,10 @@
 		<version>3.4.5</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.electroshop</groupId>
-	<artifactId>electroshop-backend</artifactId>
+	<groupId>com.zapter</groupId>
+	<artifactId>zapter-backend</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>electroshop-backend</name>
+	<name>zapter-backend</name>
 	<description>Backend for an Electronic e-commmerce platform.</description>
 	<url/>
 	<licenses>

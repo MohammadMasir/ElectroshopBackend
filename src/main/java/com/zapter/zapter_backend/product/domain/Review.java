@@ -1,0 +1,42 @@
+package com.zapter.zapter_backend.product.domain;
+
+import com.zapter.zapter_backend.product.enums.Ratings;
+import com.zapter.zapter_backend.user.domain.User;
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
+
+import java.time.LocalDateTime;
+
+@Entity
+@Getter
+@Setter
+@NoArgsConstructor
+@Table(name = "review")
+public class Review {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+	
+	private String review;
+
+	@ManyToOne
+	@JoinColumn(name = "user_id", nullable = false)
+	private User reviewUser;
+
+	@ManyToOne
+	@JoinColumn(name = "prod_id", nullable = false)
+	private Product reviewProduct;
+
+	@Column(name = "rating", nullable = false)
+	@Enumerated(EnumType.STRING)
+	private Ratings rating;
+
+	@CreationTimestamp
+	@Column(name = "created_at",updatable = false, nullable = false)
+	private LocalDateTime createdAt;
+
+}

@@ -1,0 +1,69 @@
+package com.zapter.zapter_backend.product.service;
+
+import com.zapter.zapter_backend.product.domain.Brand;
+import com.zapter.zapter_backend.product.domain.Category;
+import com.zapter.zapter_backend.product.domain.Model;
+import com.zapter.zapter_backend.product.domain.Product;
+import com.zapter.zapter_backend.product.dto.prod.ProductAdd;
+import com.zapter.zapter_backend.product.dto.prod.ProductResponse;
+import com.zapter.zapter_backend.product.mapper.ProductMapper;
+import com.zapter.zapter_backend.product.repository.BrandRepository;
+import com.zapter.zapter_backend.product.repository.CategoryRepository;
+import com.zapter.zapter_backend.product.repository.ModelRepository;
+import com.zapter.zapter_backend.product.repository.ProductRepository;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+public class ProductService {
+
+    private final ProductRepository productRepository;
+    private final ProductMapper productMapper;
+    private final CategoryRepository categoryRepository;
+    private final BrandRepository brandRepository;
+    private final ModelRepository modelRepository;
+
+    public ProductService(
+            ProductRepository productRepository,
+            ProductMapper productMapper,
+            CategoryRepository categoryRepository,
+            BrandRepository brandRepository,
+            ModelRepository modelRepository
+    ){
+        this.productRepository = productRepository;
+        this.productMapper = productMapper;
+        this.categoryRepository = categoryRepository;
+        this.brandRepository = brandRepository;
+        this.modelRepository = modelRepository;
+    }
+
+    public List<ProductResponse> getProducts(){
+        try{
+
+            return productMapper.toListOfProductResponse(productRepository.findAll());
+        } catch (RuntimeException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void createProd(ProductAdd newProduct){
+        try {
+            Category category = categoryRepository.findById(newProduct.categoryId()).orElseThrow();
+            Brand brand = brandRepository.findById(newProduct.brandId()).orElseThrow();
+            Model model = modelRepository.findById(newProduct.modelId()).orElseThrow();
+            Product product = new Product();
+            product.setCategory(category);
+            product.setBrand(brand);
+            product.setModel(model);
+            product.setName(newProduct.name());
+            product.setColor(newProduct.color());
+            product.setDescription(newProduct.description());
+            product.setPrice(newProduct.price());
+            productRepository.save(product);
+        } catch (RuntimeException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+}
